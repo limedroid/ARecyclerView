@@ -98,6 +98,34 @@ contentLayout.showEmpty();
 contentLayout.showContent();
 ```
 
+### 自定义LoadMoreView的实现
+
+自定义LoaderMoreView只需实现LoadMoreUIHandler接口，然后调用xrecyclerView的loadMoreFooterView(loadMoreView)方法即可。
+
+```java
+ @Override
+    public void onLoading() {
+        setVisibility(VISIBLE);
+        tvMsg.setText("加载中");
+        progressBar.setVisibility(VISIBLE);
+    }
+
+    @Override
+    public void onLoadFinish(boolean hasMore) {
+        if (hasMore) {
+            setVisibility(GONE);
+        } else {
+            setVisibility(VISIBLE);
+            tvMsg.setText("没有更多数据");
+            progressBar.setVisibility(GONE);
+        }
+    }
+```
+设置loadMoreView
+```java
+recyclerView.loadMoreFooterView(loadMoreView);
+```
+
 ### 自定义实现XRecyclerContentLayout
 
 在XRecyclerContentLayout中内置了SwipeRefreshLayout下拉刷新样式，您也可以自定义实现XRecyclerContentLayout，只需实现XRecyclerView.StateCallback接口即可.
@@ -113,6 +141,9 @@ public interface StateCallback {
         void refreshEnabled(boolean isEnabled); //刷新是否可用
     }
 ```
+
+***详情demo可见app module。***
+
 
 
  
