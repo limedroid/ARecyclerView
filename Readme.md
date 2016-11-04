@@ -1,6 +1,10 @@
 # XRecyclerView
 
 对RecyclerView的封装，功能强大、使用简单、扩展性强。该库主要分成三部分：**RecyclerAdapter**、**XRecyclerView**、**XRecyclerContentLayout**
+
+>该库在商业项目中历经一年多时间打磨，欢迎star、fork，后期会有更多分享，期待您的建议和关注。
+
+
 <p align="center">
   <img src="art/xrecyclerview.gif" alt="XRecyclerView" />
 </p>
