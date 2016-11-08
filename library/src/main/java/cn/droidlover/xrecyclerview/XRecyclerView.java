@@ -1,4 +1,4 @@
-package cn.droidlover.xrecyclerview;
+﻿package cn.droidlover.xrecyclerview;
 
 import android.content.Context;
 import android.support.annotation.ColorRes;
@@ -520,6 +520,7 @@ public class XRecyclerView extends RecyclerView {
 
                         if (loadMoreUIHandler != null) {
                             loadMoreUIHandler.onLoading();
+                            loadMoreView.invalidate();
                         }
                     }
                 } else {

@@ -1,4 +1,4 @@
-package cn.droidlover.xrecyclerview.demo;
+﻿package cn.droidlover.xrecyclerview.demo;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -72,7 +72,7 @@ public class MainActivity extends Activity {
                 }
                 recyclerView.setPage(page, MAX_PAGE);
             }
-        }, 2000L);
+        }, 500L);
 
     }
 

@@ -1,4 +1,4 @@
-package cn.droidlover.xrecyclerview.demo;
+﻿package cn.droidlover.xrecyclerview.demo;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -84,7 +84,7 @@ public class NextActivity extends Activity implements View.OnClickListener {
                 }
                 contentLayout.getRecyclerView().setPage(page, MAX_PAGE);
             }
-        }, 2000L);
+        }, 500L);
 
     }
 
