@@ -118,6 +118,7 @@ public class XRecyclerView extends RecyclerView {
                     if (getStateCallback() != null) getStateCallback().notifyContent();
                 } else {
                     if (finalAdapter.getHeaderSize() > 0 || finalAdapter.getFooterSize() > 0) {
+			 if (loadMoreView != null) loadMoreView.setVisibility(GONE);
                     } else {
                         if (getStateCallback() != null) getStateCallback().notifyEmpty();
                     }

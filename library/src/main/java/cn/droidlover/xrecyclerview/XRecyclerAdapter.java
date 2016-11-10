@@ -1,4 +1,4 @@
-package cn.droidlover.xrecyclerview;
+﻿package cn.droidlover.xrecyclerview;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -139,13 +139,13 @@ public class XRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return result;
     }
 
-    public boolean removeAllHeadersView(){
+    public boolean removeAllHeadersView() {
         headerViewList.clear();
         notifyDataSetChanged();
         return true;
     }
 
-    public boolean removeAllFootView(){
+    public boolean removeAllFootView() {
         footerViewList.clear();
         notifyDataSetChanged();
         return true;
@@ -179,7 +179,8 @@ public class XRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             index = viewType + ITEM_TYPE_HEADER;
             return new XHeadFootViewHolder(headerViewList.get(index));
         }
-        if (viewType < ITEM_TYPE_NORMAL + getDataCount()) {
+        if ((getDataCount() > 0 && viewType < ITEM_TYPE_NORMAL + getDataCount())
+                || viewType <= ITEM_TYPE_NORMAL + getFooterSize()) {
             index = viewType - ITEM_TYPE_NORMAL;
             if (index < footerViewList.size()) {
                 return new XHeadFootViewHolder(footerViewList.get(index));
@@ -204,13 +205,21 @@ public class XRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemViewType(int position) {
-        if (position < getHeaderSize()) {
-            return ITEM_TYPE_HEADER + position;
+        if (getDataCount() > 0) {
+            if (position < getHeaderSize()) {
+                return ITEM_TYPE_HEADER + position;
+            }
+            if (position < getHeaderSize() + getDataCount()) {
+                return getMapClassIntValue() + baseAdapter.getItemViewType(position - getHeaderSize());
+            }
+            return ITEM_TYPE_NORMAL + position - getHeaderSize() - getDataCount();
+        } else {
+            if (getHeaderSize() > 0 && position < getHeaderSize()) {
+                return ITEM_TYPE_HEADER + position;
+            }
+            return ITEM_TYPE_NORMAL + position - getHeaderSize();
         }
-        if (position < getHeaderSize() + getDataCount()) {
-            return getMapClassIntValue() + baseAdapter.getItemViewType(position - getHeaderSize());
-        }
-        return ITEM_TYPE_NORMAL + position - getHeaderSize() - getDataCount();
+
     }
 
     /**
