@@ -1,4 +1,4 @@
-# XRecyclerView
+# ARecyclerView
 
 对RecyclerView的封装，功能强大、使用简单、扩展性强。该库主要分成三部分：**RecyclerAdapter**、**XRecyclerView**、**XRecyclerContentLayout**
 
@@ -12,7 +12,7 @@
 ## 使用
 
 * Gradle ： **compile 'cn.droidlover:XRecyclerView:1.0.0'**
-* Github ： [**XRecyclerView**](https://github.com/limedroid/XRecyclerView)
+* Github ： [**ARecyclerView**](https://github.com/limedroid/ARecyclerView)
 
 ## RecyclerAdapter
 
