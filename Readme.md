@@ -9,6 +9,19 @@
   <img src="art/xrecyclerview.gif" alt="XRecyclerView" />
 </p>
 
+## 说明
+
+关于RecyclerView，有很多库。ARecyclerView与其他库有这几个区别，也许能更好的进行扩展，方便您的使用。
+
+* **ARecyclerView继承自RecyclerView，它就是一个封装了常见功能的RecyclerView，而不是继承FrameLayout**
+* **ARecyclerView中实现了Header、Footer，header和Footer可以有多个**
+* **ARecyclerView的每一个header、footer的viewType是不同的，而大部分开源库的header、footer的viewtype是相同的，其直接后果是界面卡顿**
+* **ARecyclerView可以做出几乎任何的界面效果，可以取代ScrollView，你只需要使用header或者footer**
+* **ARecyclerView中实现了上拉加载更多，可以自定义加载更多的效果，只需要实现LoadMoreUIHandler接口即可**
+* **ARecyclerView并未实现下拉刷新功能，您可以选择SwipeRefreshLayout或者其他的下拉刷新viewGroup包裹，即你可以自由选择下拉刷新功能的实现。**
+* **为了方便自定义使用，特别集成了XRecyclerContentLayout控件，你可以根据业务进行扩展，XRecyclerContentLayout只是一个示例，当然也可以满足绝大部分需求了**
+* **欢迎您提出宝贵的意见**
+
 ## 使用
 
 * Gradle ： **compile 'cn.droidlover:XRecyclerView:1.0.0'**
