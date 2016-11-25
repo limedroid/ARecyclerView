@@ -2,12 +2,8 @@
 
 对RecyclerView的封装，功能强大、使用简单、扩展性强。该库主要分成三部分：**RecyclerAdapter**、**XRecyclerView**、**XRecyclerContentLayout**
 
+
 >该库在商业项目中历经一年多时间打磨，欢迎star、fork，后期会有更多分享，期待您的建议和关注。
-
-
-<p align="center">
-  <img src="art/xrecyclerview.gif" alt="XRecyclerView" />
-</p>
 
 ## 说明
 
@@ -21,6 +17,12 @@
 * **ARecyclerView并未实现下拉刷新功能，您可以选择SwipeRefreshLayout或者其他的下拉刷新viewGroup包裹，即你可以自由选择下拉刷新功能的实现。**
 * **为了方便自定义使用，特别集成了XRecyclerContentLayout控件，你可以根据业务进行扩展，XRecyclerContentLayout只是一个示例，当然也可以满足绝大部分需求了**
 * **欢迎您提出宝贵的意见**
+
+
+<p align="center">
+  <img src="art/xrecyclerview.gif" alt="XRecyclerView" />
+</p>
+
 
 ## 使用
 
