@@ -169,7 +169,7 @@ public abstract class FlexibleDividerDecoration extends RecyclerView.ItemDecorat
     public interface PaintProvider {
 
         /**
-         * Returns {@link Paint} for divider
+         * Returns {@link android.graphics.Paint} for divider
          *
          * @param position Divider position
          * @param parent   RecyclerView

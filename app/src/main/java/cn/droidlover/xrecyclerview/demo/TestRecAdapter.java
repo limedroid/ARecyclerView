@@ -19,6 +19,7 @@ import cn.droidlover.xrecyclerview.RecyclerAdapter;
  */
 public class TestRecAdapter extends RecyclerAdapter<TestRecAdapter.Item, TestRecAdapter.ViewHolder> {
 
+    public static final int TAG_CLICK = 0;    //点击标识
 
     public TestRecAdapter(Context context) {
         super(context);
@@ -31,9 +32,18 @@ public class TestRecAdapter extends RecyclerAdapter<TestRecAdapter.Item, TestRec
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Item item = data.get(position);
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        final Item item = data.get(position);
         holder.tv_msg.setText(item.getText());
+
+        holder.tv_msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getRecItemClick() != null) {
+                    getRecItemClick().onItemClick(position, item, TAG_CLICK, holder);
+                }
+            }
+        });
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

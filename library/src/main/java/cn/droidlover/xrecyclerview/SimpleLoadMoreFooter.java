@@ -31,7 +31,7 @@ public class SimpleLoadMoreFooter extends RelativeLayout implements LoadMoreUIHa
     private void setupView() {
         inflate(getContext(), R.layout.x_view_footer_load_more_simple, this);
         tvMsg = (TextView) findViewById(R.id.tv_msg);
-        progressBar= (ProgressBar) findViewById(R.id.progressBar);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
 
     @Override

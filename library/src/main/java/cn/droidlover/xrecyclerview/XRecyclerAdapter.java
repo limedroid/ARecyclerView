@@ -1,4 +1,4 @@
-﻿package cn.droidlover.xrecyclerview;
+package cn.droidlover.xrecyclerview;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

@@ -6,8 +6,6 @@ import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 
-import cn.droidlover.qtcontentlayout.QTContentLayout;
-
 /**
  * Created by wanglei on 2016/10/30.
  */
@@ -157,10 +155,5 @@ public class XRecyclerContentLayout extends QTContentLayout implements XRecycler
 
     public XRecyclerView getRecyclerView() {
         return recyclerView;
-    }
-
-    public XRecyclerContentLayout setColorSchemeResources(int... colorResIds){
-        swipeRefreshLayout.setColorSchemeResources();
-        return this;
     }
 }

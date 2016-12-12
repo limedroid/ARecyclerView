@@ -1,4 +1,4 @@
-﻿package cn.droidlover.xrecyclerview.demo;
+package cn.droidlover.xrecyclerview.demo;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -61,7 +61,6 @@ public class NextActivity extends Activity implements View.OnClickListener {
             }
         });
         recyclerView.useDefLoadMoreView();
-
         recyclerView.addHeaderView(new HeadView(this));
 
         contentLayout.loadingView(new LoadingView(this));

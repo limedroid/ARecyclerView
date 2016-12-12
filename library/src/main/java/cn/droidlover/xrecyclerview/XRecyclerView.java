@@ -1,4 +1,4 @@
-﻿package cn.droidlover.xrecyclerview;
+package cn.droidlover.xrecyclerview;
 
 import android.content.Context;
 import android.support.annotation.ColorRes;
@@ -44,7 +44,6 @@ public class XRecyclerView extends RecyclerView {
     OnRefreshAndLoadMoreListener onRefreshAndLoadMoreListener;
 
     public static final int LOAD_MORE_ITEM_SLOP = 2;
-
 
     public XRecyclerView(Context context) {
         this(context, null);
@@ -118,10 +117,11 @@ public class XRecyclerView extends RecyclerView {
                     if (getStateCallback() != null) getStateCallback().notifyContent();
                 } else {
                     if (finalAdapter.getHeaderSize() > 0 || finalAdapter.getFooterSize() > 0) {
-			 if (loadMoreView != null) loadMoreView.setVisibility(GONE);
+                        if (loadMoreView != null) loadMoreView.setVisibility(GONE);
                     } else {
                         if (getStateCallback() != null) getStateCallback().notifyEmpty();
                     }
+
                 }
 
                 if (getStateCallback() != null) getStateCallback().refreshState(false);
@@ -311,16 +311,20 @@ public class XRecyclerView extends RecyclerView {
 
 
     private void setSpanLookUp(RecyclerView.LayoutManager layoutManager, final int spanCount) {
-
-        ((GridLayoutManager) layoutManager).setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                if (adapter != null) {
-                    return adapter.isHeaderOrFooter(position) ? spanCount : 1;
+        if (layoutManager instanceof GridLayoutManager) {
+            ((GridLayoutManager) layoutManager).setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    if (adapter != null) {
+                        return adapter.isHeaderOrFooter(position) ? spanCount : 1;
+                    }
+                    return GridLayoutManager.DEFAULT_SPAN_COUNT;
                 }
-                return GridLayoutManager.DEFAULT_SPAN_COUNT;
-            }
-        });
+            });
+        } else if (layoutManager instanceof StaggeredGridLayoutManager) {
+            ((StaggeredGridLayoutManager) layoutManager).setSpanCount(spanCount);
+        }
+
     }
 
     public boolean addHeaderView(int position, View view) {
@@ -479,7 +483,7 @@ public class XRecyclerView extends RecyclerView {
         }
     }
 
-    public void setPage(int currentPage, int totalPage) {
+    public void setPage(final int currentPage, final int totalPage) {
         this.currentPage = currentPage;
         this.totalPage = totalPage;
         if (loadMoreUIHandler != null) {
@@ -521,7 +525,6 @@ public class XRecyclerView extends RecyclerView {
 
                         if (loadMoreUIHandler != null) {
                             loadMoreUIHandler.onLoading();
-                            loadMoreView.invalidate();
                         }
                     }
                 } else {

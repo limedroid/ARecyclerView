@@ -1,4 +1,4 @@
-﻿package cn.droidlover.xrecyclerview.demo;
+package cn.droidlover.xrecyclerview.demo;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.droidlover.xrecyclerview.RecyclerItemCallback;
 import cn.droidlover.xrecyclerview.XRecyclerView;
 
 public class MainActivity extends Activity {
@@ -42,10 +43,23 @@ public class MainActivity extends Activity {
 
     private void initAdapter() {
         if (adapter == null) adapter = new TestRecAdapter(this);
-        recyclerView.verticalLayoutManager(this)
-                .setAdapter(adapter);
-        recyclerView.horizontalDivider(R.color.x_red, R.dimen.divider_height);
-        recyclerView.setOnRefreshAndLoadMoreListener(new XRecyclerView.OnRefreshAndLoadMoreListener() {
+        recyclerView.verticalLayoutManager(this)        //设置layoutManager
+                .setAdapter(adapter);                   //设置Adapter
+
+        adapter.setRecItemClick(new RecyclerItemCallback<TestRecAdapter.Item, TestRecAdapter.ViewHolder>() {
+            @Override
+            public void onItemClick(int position, TestRecAdapter.Item model, int tag, TestRecAdapter.ViewHolder holder) {
+                super.onItemClick(position, model, tag, holder);
+
+                switch (tag){
+                    case TestRecAdapter.TAG_CLICK:
+                        //TODO 事件处理
+                        break;
+                }
+            }
+        });
+        recyclerView.horizontalDivider(R.color.x_red, R.dimen.divider_height);  //设置divider
+        recyclerView.setOnRefreshAndLoadMoreListener(new XRecyclerView.OnRefreshAndLoadMoreListener() { //设置刷新和上拉加载监听
             @Override
             public void onRefresh() {
                 loadData(1);
