@@ -5,6 +5,9 @@
 
 >该库在商业项目中历经一年多时间打磨，欢迎star、fork，后期会有更多分享，期待您的建议和关注。
 
+**本库已经迁移到JitPack***
+
+
 ## 说明
 
 关于RecyclerView，有很多库。ARecyclerView与其他库有这几个区别，也许能更好的进行扩展，方便您的使用。
@@ -26,8 +29,32 @@
 
 ## 使用
 
-* Gradle ： **compile 'cn.droidlover:XRecyclerView:1.0.0'**
 * Github ： [**ARecyclerView**](https://github.com/limedroid/ARecyclerView)
+
+### step1 
+
+在根项目的`build.gradle`文件中添加
+
+```groovy
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+	}
+}
+```
+
+### step2
+
+添加依赖
+
+```groovy
+dependencies {
+	   compile 'com.github.limedroid:ARecyclerView:v1.0.0'
+}
+```
+
+
 
 ## RecyclerAdapter
 
