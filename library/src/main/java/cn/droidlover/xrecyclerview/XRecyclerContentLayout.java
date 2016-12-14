@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 
+import cn.droidlover.qtcontentlayout.QTContentLayout;
+
 /**
  * Created by wanglei on 2016/10/30.
  */
