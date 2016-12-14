@@ -156,4 +156,8 @@ public class XRecyclerContentLayout extends QTContentLayout implements XRecycler
     public XRecyclerView getRecyclerView() {
         return recyclerView;
     }
+
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return swipeRefreshLayout;
+    }
 }

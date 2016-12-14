@@ -27,3 +27,17 @@ dependencies {
     compile 'com.android.support:support-annotations:23.3.0'
     compile 'cn.droidlover:qtcontentlayout:1.0.3'
 }
+
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+artifacts {
+    archives sourcesJar
+}
