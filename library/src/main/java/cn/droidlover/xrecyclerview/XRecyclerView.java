@@ -37,6 +37,8 @@ public class XRecyclerView extends RecyclerView {
     private boolean loadMore = false;
     private int totalPage = 1;
     private int currentPage = 1;
+    private boolean isRefresh = false;
+    private boolean isRefreshEnabled = true;  //是否可刷新
 
     XRecyclerAdapter adapter;
 
@@ -111,6 +113,9 @@ public class XRecyclerView extends RecyclerView {
             private void update() {
                 int dataCount = finalAdapter.getDataCount();
                 if (dataCount > 0) {
+                    if (isRefresh) {
+                        isRefresh = false;
+                    }
                     if (loadMore) {
                         loadMoreCompleted();
                     }
@@ -148,6 +153,7 @@ public class XRecyclerView extends RecyclerView {
 
     public void onRefresh() {
         currentPage = 1;
+        isRefresh = true;
         if (getOnRefreshAndLoadMoreListener() != null) {
             getOnRefreshAndLoadMoreListener().onRefresh();
         }
@@ -478,7 +484,7 @@ public class XRecyclerView extends RecyclerView {
         }
         loadMore = false;
         if (getStateCallback() != null) {
-            getStateCallback().refreshEnabled(true);
+            changeRefreshEnableState(true);
             getStateCallback().notifyContent();
         }
     }
@@ -488,6 +494,18 @@ public class XRecyclerView extends RecyclerView {
         this.totalPage = totalPage;
         if (loadMoreUIHandler != null) {
             loadMoreUIHandler.onLoadFinish(totalPage > currentPage);
+        }
+    }
+
+    /**
+     * 改变 刷新可用 的状态
+     *
+     * @param isEnabled
+     */
+    private void changeRefreshEnableState(boolean isEnabled) {
+        if (!isRefreshEnabled) return;
+        if (getStateCallback() != null) {
+            getStateCallback().refreshEnabled(isEnabled);
         }
     }
 
@@ -507,7 +525,9 @@ public class XRecyclerView extends RecyclerView {
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
 
-            if (adapter == null || recyclerView.getLayoutManager() == null) return;
+            if (adapter == null
+                    || recyclerView.getLayoutManager() == null
+                    || isRefresh) return;
 
             int totalCount = adapter.getItemCount();
 
@@ -521,7 +541,7 @@ public class XRecyclerView extends RecyclerView {
                     if (getOnRefreshAndLoadMoreListener() != null) {
                         getOnRefreshAndLoadMoreListener().onLoadMore(++currentPage);
 
-                        if (getStateCallback() != null) getStateCallback().refreshEnabled(false);
+                        changeRefreshEnableState(false);
 
                         if (loadMoreUIHandler != null) {
                             loadMoreUIHandler.onLoading();
@@ -532,7 +552,7 @@ public class XRecyclerView extends RecyclerView {
                 }
 
             } else {
-                if (getStateCallback() != null) getStateCallback().refreshEnabled(true);
+                changeRefreshEnableState(true);
             }
 
         }
@@ -546,9 +566,7 @@ public class XRecyclerView extends RecyclerView {
 
     public XRecyclerView setOnRefreshAndLoadMoreListener(OnRefreshAndLoadMoreListener onRefreshAndLoadMoreListener) {
         this.onRefreshAndLoadMoreListener = onRefreshAndLoadMoreListener;
-        if (getStateCallback() != null) {
-            getStateCallback().refreshEnabled(true);
-        }
+        changeRefreshEnableState(true);
         return this;
     }
 
@@ -583,6 +601,19 @@ public class XRecyclerView extends RecyclerView {
 
     public OnRefreshAndLoadMoreListener getOnRefreshAndLoadMoreListener() {
         return onRefreshAndLoadMoreListener;
+    }
+
+    public boolean isRefreshEnabled() {
+        return isRefreshEnabled;
+    }
+
+    /**
+     * 设置是否可下拉刷新
+     *
+     * @param refreshEnabled
+     */
+    public void setRefreshEnabled(boolean refreshEnabled) {
+        isRefreshEnabled = refreshEnabled;
     }
 
 

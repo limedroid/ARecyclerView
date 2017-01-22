@@ -6,13 +6,13 @@ import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 
-import cn.droidlover.qtcontentlayout.QTContentLayout;
+import cn.droidlover.xstatecontroller.XStateController;
 
 /**
  * Created by wanglei on 2016/10/30.
  */
 
-public class XRecyclerContentLayout extends QTContentLayout implements XRecyclerView.StateCallback, SwipeRefreshLayout.OnRefreshListener {
+public class XRecyclerContentLayout extends XStateController implements XRecyclerView.StateCallback, SwipeRefreshLayout.OnRefreshListener {
 
     private int padding;
     private int paddingLeft;

@@ -40,6 +40,8 @@ public class NextActivity extends Activity implements View.OnClickListener {
         tv_content.setOnClickListener(this);
         tv_loading.setOnClickListener(this);
 
+        contentLayout.getRecyclerView().setRefreshEnabled(true);    //设置是否可刷新
+
         initAdapter(contentLayout.getRecyclerView());
         loadData(1);
     }
