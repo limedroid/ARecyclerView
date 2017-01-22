@@ -50,10 +50,16 @@ allprojects {
 
 ```groovy
 dependencies {
-	   compile 'com.github.limedroid:ARecyclerView:v1.0.0'
+	   compile 'com.github.limedroid:ARecyclerView:v1.1.0'
 }
 ```
 
+
+## 更新日志
+
+* v1.1.0  2017年1月22日
+	* 增加refresh与loadmore的互斥判断
+	* 修复禁止刷新的bug
 
 
 ## RecyclerAdapter
@@ -111,11 +117,12 @@ recyclerView.addHeaderView(headView);       //添加header
 recyclerView.addFooterView(footview);       //添加footer
 recyclerView.removeHeaderView(headview);    //删除header
 recyclerView.removeFooterView(footview);    //删除footer
+recyclerView.setRefreshEnabled(true);	//设置是否可下拉刷新
 ```
 
 ## XRecyclerContentLayout
 
-XRecyclerContentLayout继承了[**QTContentLayout**](https://github.com/limedroid/QTContentLayout)，可自定义Loading、Error、Empty、Content四种显示状态，满足了绝大部分需求.
+XRecyclerContentLayout继承了[**XStateController**](https://github.com/limedroid/XStateController)，可自定义Loading、Error、Empty、Content四种显示状态，满足了绝大部分需求.
 
 ### 使用示例
 
@@ -185,6 +192,10 @@ public interface StateCallback {
 ```
 
 ***详情demo可见app module。***
+
+## 相关库
+
+* [XStateController](https://github.com/limedroid/XStateController) 最完美的状态控制机，支持loading、error、empty、content四种状态的自定义动画切换
 
 ## 关于我
 
