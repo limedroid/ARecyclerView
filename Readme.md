@@ -7,6 +7,8 @@
 
 **本库已经迁移到JitPack**
 
+[![](https://jitpack.io/v/limedroid/ARecyclerView.svg)](https://jitpack.io/#limedroid/ARecyclerView)
+
 
 ## 说明
 
@@ -50,12 +52,15 @@ allprojects {
 
 ```groovy
 dependencies {
-	   compile 'com.github.limedroid:ARecyclerView:v1.1.0'
+	   compile 'com.github.limedroid:ARecyclerView:v1.2.1'
 }
 ```
 
 
 ## 更新日志
+
+* v1.2.1
+	* 添加setGridSpanLookUp方法
 
 * v1.1.0  2017年1月22日
 	* 增加refresh与loadmore的互斥判断
