@@ -333,6 +333,26 @@ public class XRecyclerView extends RecyclerView {
 
     }
 
+    /**
+     * 设置SpanSizeLookup
+     *
+     * @param layoutManager
+     * @param lookup
+     */
+    public void setGridSpanLookUp(GridLayoutManager layoutManager, final GridLayoutManager.SpanSizeLookup lookup) {
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (adapter != null) {
+                    if (adapter.isHeaderOrFooter(position)) return 1;
+
+                    return lookup.getSpanSize(position);
+                }
+                return GridLayoutManager.DEFAULT_SPAN_COUNT;
+            }
+        });
+    }
+
     public boolean addHeaderView(int position, View view) {
         boolean result = false;
         if (view == null) {
