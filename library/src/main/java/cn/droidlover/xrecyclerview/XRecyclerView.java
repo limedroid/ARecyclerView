@@ -39,6 +39,7 @@ public class XRecyclerView extends RecyclerView {
     private int currentPage = 1;
     private boolean isRefresh = false;
     private boolean isRefreshEnabled = true;  //是否可刷新
+    private int lastVelocityY = 0;
 
     XRecyclerAdapter adapter;
 
@@ -179,6 +180,7 @@ public class XRecyclerView extends RecyclerView {
 
     @Override
     public boolean fling(int velocityX, int velocityY) {
+        lastVelocityY = velocityY;
         return super.fling((int) (velocityX * xFactor), (int) (velocityY * yFactor));
     }
 
@@ -553,6 +555,7 @@ public class XRecyclerView extends RecyclerView {
 
             if (newState == RecyclerView.SCROLL_STATE_IDLE
                     && !loadMore
+                    && lastVelocityY > 0
                     && getLastVisibleItemPosition(recyclerView.getLayoutManager()) + LOAD_MORE_ITEM_SLOP > totalCount) {
 
                 if (totalPage > currentPage) {
@@ -580,7 +583,6 @@ public class XRecyclerView extends RecyclerView {
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
-
         }
     };
 

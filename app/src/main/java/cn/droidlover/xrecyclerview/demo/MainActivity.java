@@ -3,11 +3,14 @@ package cn.droidlover.xrecyclerview.demo;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import cn.droidlover.xrecyclerview.RecyclerItemCallback;
 import cn.droidlover.xrecyclerview.XRecyclerView;
@@ -15,12 +18,13 @@ import cn.droidlover.xrecyclerview.XRecyclerView;
 public class MainActivity extends Activity {
 
     XRecyclerView recyclerView;
+    SwipeRefreshLayout swipeLayout;
     TextView tv_next;
 
     TestRecAdapter adapter;
 
     static final int MAX_PAGE = 5;
-    private int pageSize = 12;
+    private int pageSize = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         recyclerView = (XRecyclerView) findViewById(R.id.recyclerView);
+        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
         tv_next = (TextView) findViewById(R.id.tv_next);
 
         tv_next.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +42,12 @@ public class MainActivity extends Activity {
             }
         });
 
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                recyclerView.onRefresh();
+            }
+        });
         initAdapter();
         loadData(1);
     }
@@ -51,7 +62,7 @@ public class MainActivity extends Activity {
             public void onItemClick(int position, TestRecAdapter.Item model, int tag, TestRecAdapter.ViewHolder holder) {
                 super.onItemClick(position, model, tag, holder);
 
-                switch (tag){
+                switch (tag) {
                     case TestRecAdapter.TAG_CLICK:
                         //TODO 事件处理
                         break;
@@ -75,6 +86,11 @@ public class MainActivity extends Activity {
 
 
     private void loadData(final int page) {
+        if (page > 1) {
+            Log.e("2222", "load more");
+        } else {
+            Log.e("2222", "refresh");
+        }
         recyclerView.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -85,6 +101,8 @@ public class MainActivity extends Activity {
                     adapter.setData(list);
                 }
                 recyclerView.setPage(page, MAX_PAGE);
+
+                swipeLayout.setRefreshing(false);
             }
         }, 500L);
 
