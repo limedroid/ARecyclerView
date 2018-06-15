@@ -199,6 +199,14 @@ public class XRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position, List<Object> payloads) {
+        int headViewSize = getHeaderSize();
+        if (position >= headViewSize && (position < headViewSize + getDataCount())) {
+            baseAdapter.onBindViewHolder(holder, position - headViewSize, payloads);
+        }
+    }
+
+    @Override
     public int getItemCount() {
         return getHeaderSize() + getDataCount() + getFooterSize();
     }
