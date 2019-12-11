@@ -15,6 +15,7 @@ import android.view.View;
 import java.util.Collections;
 import java.util.List;
 
+import android.widget.Adapter;
 import cn.droidlover.xrecyclerview.divider.HorizontalDividerItemDecoration;
 import cn.droidlover.xrecyclerview.divider.VerticalDividerItemDecoration;
 
@@ -222,7 +223,7 @@ public class XRecyclerView extends RecyclerView {
     }
 
     public XRecyclerView horizontalStaggeredLayoutManager(int spanCount) {
-        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.HORIZONTAL);
         setLayoutManager(manager);
         return this;
     }
